@@ -10,29 +10,27 @@ const PROJECTS_ENDPOINT = 'projects';
 const TASKS_ENDPOINT = 'tasks';
 
 const router = express.Router();
-const controller = new ClockifyClient();
+const client = new ClockifyClient();
 
-router.get(`/${USER_ENDPOINT}`, axiosRequestHandler(controller.getUserInfo()));
+router.get(`/${USER_ENDPOINT}`, axiosRequestHandler(client.getUserInfo()));
 router.get(
   `/${WORKSPACE_ENDPOINT}`,
-  axiosRequestHandler(controller.getWorkspaceList()),
+  axiosRequestHandler(client.getWorkspaceList()),
 );
 router.get(
   `/${WORKSPACES_ENDPOINT}`,
-  axiosRequestHandler(controller.getWorkspace()),
+  axiosRequestHandler(client.getWorkspace()),
 );
 router.post(`/${TIME_ENTRIES_ENDPOINT}`, (req, res) => {
-  const axiosRequest = axiosRequestHandler(controller.getTimeEntries(req.body));
+  const axiosRequest = axiosRequestHandler(client.getTimeEntries(req.body));
   axiosRequest(req, res);
 });
-router.get(
-  `/${PROJECTS_ENDPOINT}`,
-  axiosRequestHandler(controller.getProjects()),
-);
-// router.get(`/${TASKS_ENDPOINT}`, axiosRequestHandler(controller.getTasks()));
+
+router.get(`/${PROJECTS_ENDPOINT}`, axiosRequestHandler(client.getProjects()));
+// router.get(`/${TASKS_ENDPOINT}`, axiosRequestHandler(client.getTasks()));
 // router.get(`/${TASKS_ENDPOINT}/:taskId`, (req, res) => {
 //   const { taskId } = req.params;
-//   const axiosRequest = axiosRequestHandler(controller.getTask(taskId));
+//   const axiosRequest = axiosRequestHandler(client.getTask(taskId));
 //   axiosRequest(req, res);
 // });
 

@@ -60,6 +60,16 @@ export class ClockifyClient {
     );
   }
 
+  public async getRecentTimeEntries(
+    body: Record<string, string> | undefined = undefined,
+  ): Promise<AxiosResponse> {
+    // GET /v1/workspaces/{workspaceId}/user/{userId}/time-entries
+    const params = createQueryParams(body);
+    return this.clockify.get(
+      `/${this.WORKSPACES_ENDPOINT}/${ClockifyClient.WORKSPACE_ID}/${this.USER_ENDPOINT}/${ClockifyClient.USER_ID}/${this.TIME_ENTRIES_ENDPOINT}?${params}`,
+    );
+  }
+
   public async getProjects(): Promise<AxiosResponse> {
     // GET /v1/workspaces/{workspaceId}/projects
     return this.clockify.get(

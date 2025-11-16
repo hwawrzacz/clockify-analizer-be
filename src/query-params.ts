@@ -1,4 +1,6 @@
-const createQueryParams = (object: Record<string, string>): string => {
+const createQueryParams = (
+  object: Record<string, string> | undefined,
+): string => {
   if (!object) return '';
 
   return Object.entries(object)

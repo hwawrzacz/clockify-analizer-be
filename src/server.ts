@@ -1,5 +1,6 @@
 import express from 'express';
 import router from './router';
+import timeEntriesRouter from './recent-entries/time-entries.router';
 
 export class Server {
   private readonly PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
@@ -11,6 +12,7 @@ export class Server {
     });
 
     this.app.use(express.json());
+    this.app.use(timeEntriesRouter);
     this.app.use(router);
     this.app.get('/status', (req, res) => res.json('ok'));
   }
